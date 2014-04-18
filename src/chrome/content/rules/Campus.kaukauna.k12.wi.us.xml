@@ -1,0 +1,7 @@
+<!-- The main kaukauna.k12.wi.us website does not link to the SSL version of this site. -->
+<ruleset name="Campus.kaukauna.k12.wi.us">
+  <target host="campus.kaukauna.k12.wi.us" />
+  <target host="www.campus.kaukauna.k12.wi.us" />
+
+  <rule from="^http://(www\.)?campus\.kaukauna\.k12\.wi\.us/" to="https://campus.kaukauna.k12.wi.us/" />
+</ruleset>
