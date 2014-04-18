@@ -1,0 +1,7 @@
+<!-- This rule is needed on some pages where the website does not automatically redirect to SSL (such as the Forgotten Password page. -->
+<ruleset name="Campus.mjsd.k12.wi.us">
+  <target host="campus.mjsd.k12.wi.us" />
+  <target host="www.campus.mjsd.k12.wi.us" />
+
+  <rule from="^http://(www\.)?campus\.mjsd\.k12\.wi\.us/" to="https://campus.mjsd.k12.wi.us/" />
+</ruleset>
