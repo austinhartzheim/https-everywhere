@@ -1,0 +1,6 @@
+<!-- This rule is needed on some pages where the website does not automatically redirect to SSL, such as http://campus.madison.k12.ga.us/cparent/ ) -->
+<ruleset name="Campus.madison.k12.ga.us">
+  <target host="campus.madison.k12.ga.us" />
+
+  <rule from="^http://(www\.)?campus\.madison\.k12\.ga\.us/" to="https://campus.madison.k12.ga.us/" />
+</ruleset>
