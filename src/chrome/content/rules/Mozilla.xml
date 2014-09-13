@@ -1,6 +1,7 @@
 <!--
 	Other Mozilla rulesets:
 
+		- Allizom.org.xml
 		- BrowserID.xml
 		- Bugzilla.xml
 		- GetPersonas.xml
@@ -9,6 +10,7 @@
 		- Mozilla_Persona.xml
 		- Mozilla_Webmaker.xml
 		- Open_Badges.xml
+		- Public_Suffix.org.xml
 
 
 	CDN buckets:
@@ -67,6 +69,7 @@
 
 		- firefox.com
 		- www.firefox.com		(works; mismatched, CN: static-san.mozilla.org)
+		- labs.mozilla.com *
 		- cdn.mozilla.net		(404; mismatched, CN: gp1.wac.edgecastcdn.net)
 		- download.cdn.mozilla.net	(503, akamai)
 		- getpersonas-cdn.mozilla.net	(mismatched, CN: ssl2.cdngc.net)
@@ -95,10 +98,16 @@
 		- www.drumbeat.org
 		- (www.)firefox.com		(→ www.mozilla.org)
 		- marketplace.firefox.com
+		- accounts.firefox.com
+		- api.accounts.firefox.com
+		- oauth.accounts.firefox.com
+		- profile.accounts.firefox.com
+		- verifier.accounts.firefox.com
 
 		- mozilla.com subdomains:
 
 			- (www.)
+			- activations
 			- addons
 			- air
 			- basket
@@ -107,11 +116,22 @@
 			- crash-analysis
 			- crash-stats
 			- data
+			- fhr.data
 			- input
+			- labs		(→ mozillalabs.com)
 			- mail
 			- people
 			- mail.corp.phx1
-			- location.services
+
+			- services subdomains:
+
+				- ^
+				- account
+				- auth
+				- location
+				- setup
+
+			- snippets
 			- support
 
 		- mozilla.net subdomains:
@@ -122,6 +142,7 @@
 
 			- cdn subdomains:
 
+				- activations
 				- addons
 				- developer
 				- download		(→ ftp.mozilla.org)
@@ -140,6 +161,8 @@
 
 			- (www.)
 
+			- activations
+
 			- addons subdomains:
 
 				- ^
@@ -150,12 +173,15 @@
 			- affiliates
 			- affiliates-cdn	(→ affiliates)
 			- air
+			- aus3
+			- aus4
 			- basket
 			- beta		(→ mozilla.org/en-US/firefox/channel/)
 			- blog
 			- boardwiki
 			- bugzilla
 			- bzr
+			- calendar
 			- careers
 			- communitystore
 			- creative
@@ -164,6 +190,7 @@
 			- dnt
 			- donate
 			- download
+			- dragnet
 			- education
 			- etherpad
 			- fb-affiliates
@@ -179,6 +206,7 @@
 			- inform
 			- input
 			- intlstore
+			- intranet
 			- join
                         - keys
                         - keyserver
@@ -187,6 +215,8 @@
 			- ldap
 			- lists
 			- localize
+			- m
+			- svc.m
 			- mail
 			- mana
 			- marketplace
@@ -197,6 +227,7 @@
 			- nightly
 			- outgoing
 			- people	(→ people.mozilla.com)
+			- pfs
 			- quality
 			- reps
 			- securitywiki
@@ -205,6 +236,7 @@
 			- support
 			- talkback-public	(→ crash-stats.mozilla.com)
 			- tbpl
+			- incoming.telemetry
 			- videos	(→ videos-cdn.mozilla.net)
 			- wiki
 
@@ -229,6 +261,11 @@
 		- (www.)webfwd.org
 
 
+	These altnames don't exist:
+
+		- scrypt.accounts.firefox.com
+
+
 	Cookie domains:
 
 		- mail.mozilla.com
@@ -239,7 +276,14 @@
 
 	Mixed content:
 
-		- Image on www.mozilla.org from www.seamonkey-project.org
+		- Images, on:
+
+			- blog.mozilla.org from $self *
+			- www.mozilla.org from www.seamonkey-project.org
+
+		- Ad on activations.cdn.mozilla.net from getpocket.com *
+
+	* Secured by us
 
 -->
 <ruleset name="Mozilla">
@@ -276,6 +320,16 @@
 	<target host="www.webfwd.org" />
 
 
+	<!--	Secured by server:
+					-->
+	<!--securecookie host="^support\.mozilla\.org$" name="^(anoncsrf|sessionid)$" /-->
+	<!--
+		Not secured by server:
+					-->
+	<!--securecookie host="^addons\.mozilla\.org$" name="^(multidb_pin_writes|recently-viewed-collections|search-appver|search-platform|visitor-seen_impala_first_visit)$" /-->
+	<!--securecookie host="^support\.mozilla\.org$" name="^dwf_surveygizmo$" /-->
+
+
 	<securecookie host="^marketplace\.firefox\.com$" name=".+" />
 	<securecookie host="^.*\.mozilla\.(?:com|org)$" name=".+" />
 	<securecookie host="^mozilla(?:ignite|labs)\.com$" name=".+" />
@@ -289,8 +343,11 @@
 	<rule from="^https?://(?:www\.)?firefox\.com/"
 		to="https://www.mozilla.org/firefox/" />
 
-	<rule from="^http://marketplace\.firefox\.com/"
-		to="https://marketplace.firefox.com/" />
+	<rule from="^http://(accounts|(?:api|oauth|profile|verifier)\.accounts|marketplace)\.firefox\.com/"
+		to="https://$1.firefox.com/" />
+
+	<rule from="^http://labs\.mozilla\.(?:com|org)/+"
+		to="https://mozillalabs.com/" />
 
 	<rule from="^http://([\w.-]+\.)?mozilla\.com/"
 		to="https://$1mozilla.com/" />
@@ -314,9 +371,6 @@
 
 	<rule from="^https?://beta\.mozilla\.org/"
 		to="https://www.mozilla.org/firefox/channel/" />
-
-	<rule from="^http://labs\.mozilla\.org/"
-		to="https://mozillalabs.com/" />
 
 	<rule from="^https?://people\.mozilla\.org/"
 		to="https://people.mozilla.org/" />
