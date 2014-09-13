@@ -47,11 +47,18 @@
 <ruleset name="University of Wisconsin-Madison">
 
 	<target host="*.wisc.edu" />
-	<target host="*.library.wisc.edu" />
-		<exclusion pattern="^http://(?:www\.)?library\.wisc\.edu/(?!css/|images/)" />
+		<exclusion pattern="^http://(?:www\.)?depot\.library\.wisc\.edu/" />
 
 
-	<rule from="^http://(learnuw|(?:ecs\.|www\.)?library|login|my|mywebspace|wayf|wiscmail)\.wisc\.edu/"
+	<rule from="^http://(learnuw|(?:ecs\.|www\.)?login|my|mywebspace|wayf|wiscmail|doit|(www\.)?union)\.wisc\.edu/"
 		to="https://$1.wisc.edu/" />
+
+	<!-- WWW Required for SSL -->
+	<rule from="^http://(?:www\.)?(housing)\.wisc\.edu/"
+	      to="https://www.$1.wisc.edu/" />
+
+	<!-- WARNING: Might break access for users who are not logged in. -->
+	<rule from="^http://(search|www)\.library\.wisc\.edu/"
+	        to="https://$1.library.wisc.edu/" />
 
 </ruleset>
