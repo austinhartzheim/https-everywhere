@@ -66,11 +66,11 @@
 	<exclusion pattern="^http://(?:www\.)?depot\.library\.wisc\.edu/" />
 	<exclusion pattern="^http://pages\.cs\.wisc\.edu/+~" />
 
-	<rule from="^http://((?:condor-wiki|htcondor-wiki|pages|research)\.cs|learnuw|login|my|mywebspace|wayf|wiscmail|doit|(www\.)?union)\.wisc\.edu/"
+	<rule from="^http://((?:condor-wiki|htcondor-wiki|pages|research)\.cs|learnuw|login|my|mywebspace|wayf|wiscmail|doit|(www\.)?union|discovery)\.wisc\.edu/"
 		to="https://$1.wisc.edu/" />
 
 	<!-- WWW Required for SSL -->
-	<rule from="^http://(?:www\.)?(housing|library)\.wisc\.edu/"
+	<rule from="^http://(?:www\.)?(housing|library|cs)\.wisc\.edu/"
 	      to="https://www.$1.wisc.edu/" />
 
 	<!-- WARNING: Might break access for users who are not logged in. -->
