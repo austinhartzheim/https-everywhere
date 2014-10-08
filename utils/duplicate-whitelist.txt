@@ -1,4 +1,5 @@
 abcnews.go.com
+acm.org
 addons.videolan.org
 adyadvantage.com
 affair-guide.com
@@ -63,9 +64,11 @@ eyeos-apps.org
 fashionara.com
 fiercewireless.com
 firstclassmagazine.se
+fishwrapper.com
 flowingdata.com
 foxydeal.com
 foxydeal.de
+freeporngif.com
 frugalware-art.org
 genivi.org
 gentoo-art.org
@@ -114,6 +117,7 @@ linuxmint-art.org
 litespeedtech.com
 livejournal.com
 maemo-apps.org
+makeagif.com
 mandiant.com
 marketplace.org
 mediciglobal.com
@@ -121,11 +125,11 @@ megaglest.org
 *.meetupstatic.com
 misadventureswithandi.com
 mos.org
+mozo.com.au
 mybuys.com
 my.cl.ly
 mycanvas.com
 nandos.com
-naughtyshowreviews.com
 nelonen.fi
 *.netapp.com
 newrepublic.com
@@ -142,7 +146,6 @@ orange.jobs
 osdv.org
 outbrain.com
 *.ovh.net
-owncloud.org
 passmark.com
 pdu.edu
 plantappstore.com
@@ -153,6 +156,7 @@ popularmechanics.com
 qt-apps.org
 qualaris.com
 redbullmobile.at
+reddpics.com
 sandsmedia.com
 savethechildren.org.uk
 scribusstuff.org
@@ -168,6 +172,7 @@ suse-art.org
 tango.me
 tesco.com
 test-ipv6.cz
+theatlantic.com
 thedilbertstore.com
 thefederalistpapers.org
 *.thewire.com
@@ -182,6 +187,7 @@ ul.ie
 upic.me
 usni.org
 variety.com
+vidup.me
 *.vk.com
 vk.com
 vkontakte.ru
@@ -195,8 +201,6 @@ www.cccure.training
 www.cpaste.org
 www.df.eu
 www.fiercewireless.com
-www.getdigital-blog.de
-www.getdigital.de
 www.google.*
 www.google.co.*
 www.google.com

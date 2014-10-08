@@ -11,6 +11,7 @@
 		- ASPNETcdn.com.xml
 		- Bing.xml
 		- Ch9.ms.xml
+		- Codeplex.xml
 		- DreamSpark.com.xml
 		- Halo.xml
 		- Live.xml
@@ -19,6 +20,7 @@
 		- Microsoft_Store.xml
 		- Moreinterop.com.xml
 		- MSDN.xml
+		- Msecnd.net.xml
 		- MSN.xml
 		- Newsvine.com.xml
 		- OneDrive.com.xml
@@ -26,6 +28,7 @@
 		- Photosynth.xml
 		- Skype.xml
 		- S-msn.com.xml
+		- Sway.xml
 		- System_Center_Advisor.com.xml
 		- Technet.com.xml
 		- Virtualearth.net.xml
@@ -81,6 +84,7 @@
 			- privacy		(times out)
 			- academic.research ***
 			- sharepoint		(redirects to login.live.com, cert valid)
+			- vepexp		(refused)
 			- edir.windowsm		(404)
 			- visio **
 			- (www.)windows **
