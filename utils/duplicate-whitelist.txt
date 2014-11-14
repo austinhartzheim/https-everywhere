@@ -3,6 +3,7 @@ acm.org
 addons.videolan.org
 adyadvantage.com
 affair-guide.com
+afp548.com
 anunciou.com
 arch-stuff.org
 articulate.com
@@ -12,12 +13,14 @@ beautifuldecay.com
 beryl-themes.org
 *.bethsoft.com
 bethsoft.com
+blockstream.com
 blogsmithmedia.com
 boneblast.com
 box-look.org
 casaar.com
 cccure.training
 cli-apps.org
+consumerreports.org
 clients1.google.*
 clients1.google.co.*
 clients1.google.com.*
@@ -53,6 +56,7 @@ dice.com
 drownedinsound.com
 e17-stuff.org
 ede-look.org
+elementaryos.org
 *.eloqua.com
 englishdefenceleague.net
 ensigniamail.com
@@ -70,6 +74,7 @@ foxydeal.com
 foxydeal.de
 freeporngif.com
 frugalware-art.org
+g33kinfo.com
 genivi.org
 gentoo-art.org
 getdigital-blog.de
@@ -94,6 +99,7 @@ hollywoodoutlaws.com
 hollywoodreporter.com
 hometheaterreview.com
 hope.net
+inc.com
 inductionsolutions.com
 infinet.com.au
 invasion.com
@@ -108,6 +114,7 @@ kde-look.org
 kinfolk.com
 latimes.com
 leo.org
+leviathansecurity.com
 liberalamerica.org
 liftdna.com
 linbit.com
@@ -123,11 +130,12 @@ marketplace.org
 mediciglobal.com
 megaglest.org
 *.meetupstatic.com
+midasgreentech.com
 misadventureswithandi.com
+modelviewculture.com
 mos.org
 mozo.com.au
 mybuys.com
-my.cl.ly
 mycanvas.com
 nandos.com
 nelonen.fi
@@ -157,6 +165,7 @@ qt-apps.org
 qualaris.com
 redbullmobile.at
 reddpics.com
+rosettacode.org
 sandsmedia.com
 savethechildren.org.uk
 scribusstuff.org
@@ -176,10 +185,13 @@ theatlantic.com
 thedilbertstore.com
 thefederalistpapers.org
 *.thewire.com
+thinkprogress.org
+threatmetrix.com
 *.time.com
 togevi.com
 traction-digital.com
 tradepub.com
+tripwire.com
 trustthevote.org
 ubermedia.com
 ubuntu-art.org
