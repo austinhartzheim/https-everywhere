@@ -70,7 +70,7 @@
 		to="https://$1.wisc.edu/" />
 
 	<!-- WWW Required for SSL -->
-	<rule from="^http://(?:www\.)?(housing|library|cs|uhs)\.wisc\.edu/"
+	<rule from="^http://(?:www\.)?(housing|library|cs|uhs|ssc)\.wisc\.edu/"
 	      to="https://www.$1.wisc.edu/" />
 
 	<!-- WARNING: Might break access for users who are not logged in. -->
