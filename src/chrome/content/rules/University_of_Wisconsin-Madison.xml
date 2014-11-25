@@ -66,7 +66,7 @@
 	<exclusion pattern="^http://(?:www\.)?depot\.library\.wisc\.edu/" />
 	<exclusion pattern="^http://pages\.cs\.wisc\.edu/+~" />
 
-	<rule from="^http://((?:condor-wiki|htcondor-wiki|pages|research)\.cs|learnuw|login|my|mywebspace|wayf|wiscmail|doit|(www\.)?union|discovery|go|wiscsoftware)\.wisc\.edu/"
+	<rule from="^http://((?:condor-wiki|htcondor-wiki|pages|research)\.cs|learnuw|login|my|mywebspace|wayf|wiscmail|doit|(www\.)?union|discovery|go|wiscsoftware|law)\.wisc\.edu/"
 		to="https://$1.wisc.edu/" />
 
 	<!-- WWW Required for SSL -->
