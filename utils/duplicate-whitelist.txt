@@ -39,6 +39,7 @@ clients5.google.com.*
 clients6.google.*
 clients6.google.co.*
 clients6.google.com.*
+consumerreports.org
 controllermax.com
 cpaste.org
 creativeskills.be
@@ -198,7 +199,6 @@ ubuntu-art.org
 ul.ie
 upic.me
 usni.org
-variety.com
 vidup.me
 *.vk.com
 vk.com
