@@ -1,4 +1,21 @@
+
 <!--
+Disabled by https-everywhere-checker because:
+Fetch error: http://ja.linkedin.com/ => https://ja.linkedin.com/: (51, "SSL: no alternative certificate subject name matches target host name 'ja.linkedin.com'")
+Fetch error: http://ko.linkedin.com/ => https://ko.linkedin.com/: (6, 'Could not resolve host: ko.linkedin.com')
+Fetch error: http://th-th.help.linkedin.com/ => https://th-th.help.linkedin.com/: Too many redirects while fetching 'http://th-th.help.linkedin.com/'
+Fetch error: http://asistenta.linkedin.com/ => https://asistenta.linkedin.com/: Too many redirects while fetching 'http://asistenta.linkedin.com/'
+Fetch error: http://marketing.linkedin.com/ => https://marketing.linkedin.com/: Too many redirects while fetching 'https://marketing.linkedin.com/'
+
+	NB: massively important => backport this
+
+
+	Other LinkedIn rulesets:
+
+		- LI_CDN.com.xml
+		- Lnkd.In.xml
+
+
 	There are lots of places where it doesn't work, so rather
 	than add lots of exclusions, I've only added added rules
 	for sections of the site that I know allow it.
@@ -6,149 +23,147 @@
 
 	Nonfunctional domains:
 
-		- m.c.lnkd.licdn.com ¹
-		- s.c.lnkd.licdn.com ¹
+		- blog ¹
+		- compass ²
+		- investors ²
+		- ourstory ²
+		- static01 ²
 
-		- blog.linkedin.com		(Redirects to http)
-		- compass.linkedin.com ³
-		- investors.linkedin.com
-		- ourstory.linkedin.com		(Refused)
-		- static01.linkedin.com		(Refused)
-
-	¹ 400; mismatched, CN: *.hs.llnwd.net
-	³ Refused
+	¹ Redirects to http
+	² Refused
 
 
-	Problematic domains:
+	Problematic subdomains:
 
-		- dlc1-s.licdn.com ¹
-		- dlc2-s.licdn.com ¹
-
-		- \w\w.linkedin.com ¹
-		- cms.linkedin.com ¹
-		- brand.linkedin.com ¹
-		- bringinyourparents.linkedin.com ¹
-		- business.linkedin.com	 ¹
-		- certification.linkedin.com ¹
-		- commsconnect.linkedin.com ¹
-		- developer.linkedin.com ¹
-		- developers.linkedin.com ¹
-		- economicgraph.linkedin.com ²
-		- engineering.linkedin.com ¹
-		- (www.)financeconnect.linkedin.com ¹
-		- forms.linkedin.com ¹
-		- gsk.linkedin.com ¹
-		- imagine.linkedin.com ¹
-		- (www.)lifg.linkedin.com ¹
-		- linkedinforgood.linkedin.com ¹
-		- (www.)live.linkedin.com ¹
-		- members.linkedin.com ¹
-		- mobile.linkedin.com ¹
-		- nonprofit.linkedin.com ¹
-		- nonprofits.linkedin.com ¹
-		- press.linkedin.com		(Mismatched, CN: *.presscentre.com)
-		- sales.linkedin.com		(Expired 2014)
-		- (www.)salesconnect.linkedin.com ¹
-		- smallbusiness.linkedin.com ¹
-		- specialedition.linkedin.com ¹
-		- studentcareers.linkedin.com ¹
-		- students.linkedin.com ¹
-		- talent.linkedin.com ¹
-		- university.linkedin.com ¹
-		- veterans.linkedin.com ¹
-		- volunteer.linkedin.com ¹
-		- volunteers.linkedin.com ¹
-
-		- lnkd.in *
+		- \w\w ¹
+		- cms ¹
+		- brand ¹
+		- bringinyourparents ¹
+		- business	 ¹
+		- certification ¹
+		- commsconnect ¹
+		- developer ¹
+		- developers ¹
+		- economicgraph ²
+		- engineering ¹
+		- (www.)?financeconnect ¹
+		- forms ¹
+		- gsk ¹
+		- imagine ¹
+		- ja *
+		- (www.)?lifg ¹
+		- linkedinforgood ¹
+		- (www.)?live ¹
+		- members ¹
+		- mobile ¹
+		- nonprofit ¹
+		- nonprofits ¹
+		- press ³
+		- sales ⁴
+		- (www.)?salesconnect ¹
+		- smallbusiness ¹
+		- specialedition ¹
+		- studentcareers ¹
+		- students ¹
+		- talent ¹
+		- university ¹
+		- veterans ¹
+		- volunteer ¹
+		- volunteers ¹
 
 	¹ Insecure renegotiation
 	² Refused
 	* Mismatched
+	³ Mismatched, CN: *.presscentre.com
+	⁴ Expired 2014
 
 
-	Fully covered domains:
+	Fully covered subdomains:
 
-		- dlc1-s.licdn.com
-		- dlc2-s.licdn.com
-		- media.licdn.com
-		- static.licdn.com
-
-		- \w\w.linkedin.com:
+		- \w\w:
 
 			- es
+			- jp
 			- us
 
-		- aide.linkedin.com
-		- ajuda.linkedin.com
-		- asistenta.linkedin.com
-		- ayuda.linkedin.com
-		- in.bantuan.linkedin.com
-		- ms.bantuan.linkedin.com
-		- (www.)brand.linkedin.com
-		- (www.)bringinyourparents.linkedin.com
-		- (www.)business.linkedin.com
-		- (www.)certification.linkedin.com
-		- cms.linkedin.com
-		- (www.)commsconnect.linkedin.com
-		- developer.linkedin.com
-		- developers.linkedin.com
-		- e.linkedin.com
-		- engineering.linkedin.com
-		- (www.)financeconnect.linkedin.com
-		- forms.linkedin.com
-		- (www.)gsk.linkedin.com
-		- guida.linkedin.com
-		- hilfe.linkedin.com
-		- (www.)imagine.linkedin.com
+		- aide
+		- ajuda
+		- asistenta
+		- ayuda
+		- in.bantuan
+		- ms.bantuan
+		- (www.)?brand
+		- (www.)?bringinyourparents
+		- (www.)?business
+		- (www.)?certification
+		- cms
+		- (www.)?commsconnect
+		- developer
+		- developers
+		- e
+		- economicgraph
+		- engineering
+		- (www.)?financeconnect
+		- forms
+		- (www.)?gsk
+		- guida
+		- hilfe
+		- (www.)?imagine
 
-		- \w\w.help.linkedin.com:
+		- \w\w.help:
 
 			- ja
 			- ko
 			- ru
 
-		- \w\w-\w\w.help.linkedin.com:
+		- \w\w-\w\w.help:
 
 			- ar-ae
 			- th-th
 			- zh-cn
 			- zh-tw
 
-		- help-enterprise.linkedin.com
-		- help-internal.linkedin.com
-		- help-test.linkedin.com
-		- help-test2.linkedin.com
-		- hilfe.linkedin.com
-		- hjalp.linkedin.com
-		- hjaelp.linkedin.com
-		- hjelp.linkedin.com
-		- hulp.linkedin.com
-		- (www.)lifg.linkedin.com
-		- (www.)linkedinforgood.linkedin.com
-		- (www.)live.linkedin.com
-		- (www.)members.linkedin.com
-		- (www.)mobile.linkedin.com
-		- napoveda.linkedin.com
-		- (www.)nonprofit.linkedin.com
-		- nonprofits.linkedin.com
-		- polls.linkedin.com
-		- pomoc.linkedin.com
-		- (www.)premium.linkedin.com
-		- (www.)purchasing.linkedin.com
-		- (www.)salesconnect.linkedin.com
-		- (www.)smallbusiness.linkedin.com
-		- specialedition.linkedin.com
-		- (www.)studentcareers.linkedin.com
-		- (www.)students.linkedin.com
-		- talent.linkedin.com
-		- tulong.linkedin.com
-		- (www.)university.linkedin.com
-		- (www.)veterans.linkedin.com
-		- (www.)volunteer.linkedin.com
-		- volunteers.linkedin.com
-		- yardim.linkedin.com
+		- help-enterprise
+		- help-internal
+		- help-test
+		- help-test2
+		- hilfe
+		- hjalp
+		- hjaelp
+		- hjelp
+		- hulp
+		- (www.)?lifg
+		- (www.)?linkedinforgood
+		- (www.)?live
 
-		- lnkd.in	(→ www.linkedin.com)
+		- lms
+		- dev.lms
+		- dev-signin.lms
+		- sandbox.lms
+		- signin.lms
+
+		- marketing
+		- (www.)?members
+		- (www.)?mobile
+		- napoveda
+		- (www.)?nonprofit
+		- nonprofits
+		- polls
+		- pomoc
+		- (www.)?premium
+		- (www.)?purchasing
+		- (www.)?salesconnect
+		- (www.)?smallbusiness
+		- specialedition
+		- (www.)?studentcareers
+		- (www.)?students
+		- talent
+		- tulong
+		- (www.)?university
+		- (www.)?veterans
+		- (www.)?volunteer
+		- volunteers
+		- yardim
 
 
 	These altnames don't exist:
@@ -183,8 +198,8 @@
 		- \w\w.help.linkedin.com
 		- \w\w-\w\w.help.linkedin.com
 		- hilfe.linkedin.com
-		- hjalp.linkedin.com
 		- hjaelp.linkedin.com
+		- hjalp.linkedin.com
 		- hjelp.linkedin.com
 		- hulp.linkedin.com
 		- linkedinforgood.linkedin.com
@@ -203,18 +218,124 @@
 
 		- https://www.linkedin.com/settings/security-v2
 
--->
-<ruleset name="LinkedIn (partial)">
 
-	<target host="*.licdn.com" />
+	Mixed content:
+
+		- favicon on engineering from s.c.lnkd.licdn.com
+
+		- Bug on business from www.pubads.g.doubleclick.net
+
+-->
+<ruleset name="LinkedIn.com (partial)" default_off='failed ruleset test'>
+
 	<target host="linkedin.com" />
 	<target host="*.linkedin.com" />
 		<!--
 			Redirects to http:
 						-->
 		<!--exclusion pattern="^http://blog\.linkedin\.com/($|favicon\.ico|wp-content/)" /-->
-		<!--exclusion pattern="^http://marketing\.linkedin\.com/$" /-->
-	<target host="lnkd.in" />
+
+		<exclusion pattern="^http://ja\.linkedin\.com/" />
+
+			<test url="http://ja.linkedin.com/" />
+
+		<test url="http://es.linkedin.com/" />
+		<test url="http://jp.linkedin.com/" />
+		<test url="http://us.linkedin.com/" />
+
+		<test url="http://ar-ae.help.linkedin.com/" />
+		<test url="http://th-th.help.linkedin.com/" />
+		<test url="http://zh-cn.help.linkedin.com/" />
+		<test url="http://zh-tw.help.linkedin.com/" />
+
+		<test url="http://ajuda.linkedin.com/" />
+		<test url="http://asistenta.linkedin.com/" />
+		<test url="http://ayuda.linkedin.com/" />
+		<test url="http://in.bantuan.linkedin.com/" />
+		<test url="http://ms.bantuan.linkedin.com/" />
+		<test url="http://cms.linkedin.com/" />
+		<test url="http://developer.linkedin.com/" />
+		<test url="http://developers.linkedin.com/" />
+		<test url="http://e.linkedin.com/" />
+		<test url="http://economicgraph.linkedin.com/" />
+		<test url="http://engineering.linkedin.com/" />
+		<test url="http://forms.linkedin.com/" />
+		<test url="http://guida.linkedin.com/" />
+		<test url="http://help.linkedin.com/" />
+		<test url="http://help-enterprise.linkedin.com/" />
+		<test url="http://help-internal.linkedin.com/" />
+		<test url="http://help-test.linkedin.com/" />
+		<test url="http://help-test2.linkedin.com/" />
+		<test url="http://hilfe.linkedin.com/" />
+		<test url="http://hjalp.linkedin.com/" />
+		<test url="http://hjelp.linkedin.com/" />
+		<test url="http://hulp.linkedin.com/" />
+		<test url="http://marketing.linkedin.com/" />
+		<test url="http://napoveda.linkedin.com/" />
+		<test url="http://nonprofits.linkedin.com/" />
+		<test url="http://platform.linkedin.com/" />
+		<test url="http://polls.linkedin.com/" />
+		<test url="http://pomoc.linkedin.com/" />
+		<test url="http://specialedition.linkedin.com/" />
+		<test url="http://talent.linkedin.com/" />
+		<test url="http://tulong.linkedin.com/" />
+		<test url="http://volunteers.linkedin.com/" />
+		<test url="http://www.linkedin.com/" />
+		<test url="http://yardim.linkedin.com/" />
+
+		<test url="http://brand.linkedin.com/" />
+		<test url="http://www.brand.linkedin.com/" />
+		<test url="http://bringinyourparents.linkedin.com/" />
+		<test url="http://www.bringinyourparents.linkedin.com/" />
+		<test url="http://business.linkedin.com/" />
+		<test url="http://www.business.linkedin.com/" />
+		<test url="http://certification.linkedin.com/" />
+		<test url="http://www.certification.linkedin.com/" />
+		<test url="http://commsconnect.linkedin.com/" />
+		<test url="http://www.commsconnect.linkedin.com/" />
+		<test url="http://financeconnect.linkedin.com/" />
+		<test url="http://www.financeconnect.linkedin.com/" />
+		<test url="http://gsk.linkedin.com/" />
+		<test url="http://www.gsk.linkedin.com/" />
+		<test url="http://imagine.linkedin.com/" />
+		<test url="http://www.imagine.linkedin.com/" />
+		<test url="http://lifg.linkedin.com/" />
+		<test url="http://www.lifg.linkedin.com/" />
+		<test url="http://linkedinforgood.linkedin.com/" />
+		<test url="http://www.linkedinforgood.linkedin.com/" />
+		<test url="http://live.linkedin.com/" />
+		<test url="http://www.live.linkedin.com/" />
+
+		<test url="http://lms.linkedin.com/" />
+		<test url="http://dev.lms.linkedin.com/" />
+		<test url="http://dev-signin.lms.linkedin.com/" />
+		<test url="http://sandbox.lms.linkedin.com/" />
+		<test url="http://signin.lms.linkedin.com/" />
+
+		<test url="http://members.linkedin.com/" />
+		<test url="http://www.members.linkedin.com/" />
+		<test url="http://mobile.linkedin.com/" />
+		<test url="http://www.mobile.linkedin.com/" />
+		<test url="http://nonprofit.linkedin.com/" />
+		<test url="http://www.nonprofit.linkedin.com/" />
+		<test url="http://premium.linkedin.com/" />
+		<test url="http://www.premium.linkedin.com/" />
+		<test url="http://purchasing.linkedin.com/" />
+		<test url="http://www.purchasing.linkedin.com/" />
+		<test url="http://salesconnect.linkedin.com/" />
+		<test url="http://www.salesconnect.linkedin.com/" />
+		<test url="http://smallbusiness.linkedin.com/" />
+		<test url="http://www.smallbusiness.linkedin.com/" />
+		<test url="http://students.linkedin.com/" />
+		<test url="http://www.students.linkedin.com/" />
+		<test url="http://studentcareers.linkedin.com/" />
+		<test url="http://www.studentcareers.linkedin.com/" />
+		<test url="http://university.linkedin.com/" />
+		<test url="http://www.university.linkedin.com/" />
+		<test url="http://veterans.linkedin.com/" />
+		<test url="http://www.veterans.linkedin.com/" />
+		<test url="http://volunteer.linkedin.com/" />
+		<test url="http://www.volunteer.linkedin.com/" />
 
 
 	<!--	Not secured by server:
@@ -224,16 +345,18 @@
 	<!--securecookie host="^(\.\w\w|business|gsk|linkedinforgood|mobile|premium|smallbusiness|students)\.linkedin\.com$" name="^JSESSIONID$" /-->
 	<!--securecookie host="^(aide|ajuda|asistenta|ayuda|in\.bantuan|ms\.bantuan|guida|help|\w\w\.help|\w\w-\w\w\.help|hilfe|hjalp|hjaelp|hjelp|hulp|napoveda|pomoc|yardim)\.linkedin\.com$" name="^cp_session$" /-->
 	<!--securecookie host="^press\.linkedin\.com$" name="^ASP\.NET_SessionId$" /-->
-	<!--securecookie host="^www\.linkedin\.com$" name="^(leo_auth_token|visit)$" /-->
+	<!--securecookie host="^www\.linkedin\.com$" name="^(L1c|denial-reason-code|leo_auth_token|visit)$" /-->
 	<!--securecookie host="^\.www\.linkedin\.com$" name="^JSESSIONID" /-->
 
 	<securecookie host="^(?:aide|a[jy]uda|asistenta|(?:in|ms)\.bantuan|business|gsk|guida|help|\w\w\.help|\w\w-\w\w\.help|hilfe|hj[ae]lp|hjaelp|hulp|linkedinforgood|mobile|pomoc|www|yardim)?\.linkedin\.com$" name=".+" />
 
 
-	<rule from="^http://(dlc[12]-s|media|static)\.licdn\.com/"
-		to="https://$1.licdn.com/" />
+	<rule from="^http://sales\.linkedin\.com/$"
+		to="https://business.linkedin.com/sales-solutions" />
 
-	<rule from="^http://((?:\w\w|aide|a[jy]uda|asistenta|(?:in|ms)\.bantuan|cms|developers?|e|engineering|forms|guida|help|(?:\w\w|\w\w-\w\w)\.help|help-(?:enterprise|internal|test2?)|hilfe|hj[ae]lp|hjaelp|hulp|napoveda|nonprofits|platform|polls|pomoc|specialedition|talent|tulong|volunteers|www|yardim)\.)?linkedin\.com/"
+		<test url="http://sales.linkedin.com/" />
+
+	<rule from="^http://((?:\w\w|aide|a[jy]uda|asistenta|(?:in|ms)\.bantuan|cms|developers?|e|economicgraph|engineering|forms|guida|help|(?:\w\w|\w\w-\w\w)\.help|help-(?:enterprise|internal|test2?)|hilfe|hj[ae]lp|hjaelp|hulp|lms|(?:dev|dev-signin|sandbox|signin)\.lms|marketing|napoveda|nonprofits|platform|polls|pomoc|specialedition|talent|tulong|volunteers|www|yardim)\.)?linkedin\.com/"
 		to="https://$1linkedin.com/" />
 
 	<!--	Domains for which both !www and www exist,
@@ -241,22 +364,5 @@
 						-->
 	<rule from="^http://(www\.)?(brand|bringinyourparents|business|certification|commsconnect|financeconnect|gsk|imagine|lifg|linkedinforgood|live|members|mobile|nonprofit|premium|purchasing|salesconnect|smallbusiness|students|studentcareers|university|veterans|volunteer)\.linkedin\.com/"
 		to="https://$1$2.linkedin.com/" />
-
-	<rule from="^http://economicgraph\.linkedin\.com/$"
-		to="https://www.linkedin.com/company/linkedin-economic-graph" />
-
-	<rule from="^http://marketing\.linkedin\.com/$"
-		to="https://business.linkedin.com/marketing-solutions" />
-
-	<rule from="^http://sales\.linkedin\.com/$"
-		to="https://business.linkedin.com/sales-solutions" />
-
-	<!--	Redirects like so:
-					-->
-	<rule from="^http://lnkd\.in/+([^?]*)(?:\?)?$"
-		to="https://www.linkedin.com/slink?code=$1" />
-
-	<rule from="^http://lnkd\.in/+([^?]*)\?"
-		to="https://www.linkedin.com/slink?code=$1&amp;" />
 
 </ruleset>

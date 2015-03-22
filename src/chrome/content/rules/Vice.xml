@@ -1,4 +1,8 @@
+
 <!--
+Disabled by https-everywhere-checker because:
+Fetch error: http://assets.noisey.cn/ => https://d1ymkg0yqrfr5q.cloudfront.net/: (6, 'Could not resolve host: assets.noisey.cn')
+
 	For problematic rules, see Vice-problematic.xml.
 
 
@@ -67,10 +71,12 @@
 		- assets-news
 		- assets-sports
 		- embeds
+		- motherboard-images
 		- munchies
 		- news
 		- noisey
 		- sports
+		- sports-images
 		- staging-assets-news
 		- thump
 		- assets.thump	(→ df5qbu832tmne.cloudfront.net)
@@ -95,10 +101,12 @@
 	* Secured by us
 
 -->
-<ruleset name="Vice (partial)">
+<ruleset name="Vice (partial)" default_off='failed ruleset test'>
 
-	<target host="*.motherboard.tv" />
-	<target host="assets.noisey.*" />
+	<target host="assets.motherboard.tv" />
+	<target host="assets2.motherboard.tv" />
+	<target host="assets.noisey.cn" />
+	<target host="assets.noisey.com" />
 	<target host="assets.thecreatorsproject.com" />
 	<target host="vice.com" />
 	<target host="*.vice.com" />
@@ -106,7 +114,26 @@
 		<!--
 			Redirects to http:
 						-->
-		<!--exclusion pattern="^http://motherboard\.vice\.com/+(?!assets/(?:cs|favicon|image)s/)" /-->
+		<!--exclusion pattern="^http://motherboard\.vice\.com/" /-->
+
+		<test url="http://assets.vice.com/" />
+		<test url="http://assets2.vice.com/" />
+		<test url="http://assets-i-d.vice.com/" />
+		<test url="http://assets-news.vice.com/" />
+		<test url="http://assets-sports.vice.com/" />
+		<test url="http://embeds.vice.com/" />
+		<test url="http://motherboard-images.vice.com/" />
+		<test url="http://munchies.vice.com/" />
+		<test url="http://news.vice.com/" />
+		<test url="http://news.vice.com/shows" />
+		<test url="http://noisey.vice.com/" />
+		<test url="http://sports.vice.com/" />
+		<test url="http://sports-images.vice.com/" />
+		<test url="http://staging-assets-news.vice.com/" />
+		<test url="http://thump.vice.com/" />
+		<test url="http://assets.thump.vice.com/" />
+		<test url="http://www.vice.com/" />
+		<test url="http://www.vice.com/stuff" />
 
 
 	<rule from="^http://assets\.motherboard\.tv/"
@@ -131,7 +158,7 @@
 	<rule from="^http://assets-i-d\.vice\.com/"
 		to="https://d1wzhalc7g55g3.cloudfront.net/" />
 
-	<rule from="^http://((?:assets-(?:news|sports)|assets2|embeds|images|munchies|news|noisey|socials|sports|staging-assets-news|thump|www)\.)?vice\.com/"
+	<rule from="^http://((?:assets-(?:news|sports)|assets2|embeds|images|(?:motherboard|sports)-images|munchies|news|noisey|socials|sports|staging-assets-news|thump|www)\.)?vice\.com/"
 		to="https://$1vice.com/" />
 
 	<!--rule from="^http://hbo\.vice\.com/.*"

@@ -1,5 +1,4 @@
-// LOG LEVELS ---
-
+// LOG LEVELS
 let VERB=1;
 let DBUG=2;
 let INFO=3;
@@ -18,15 +17,11 @@ let https_everywhere_blacklist = {};
 // domains for which there is at least one blacklisted URL
 let https_blacklist_domains = {};
 
-//
 const CI = Components.interfaces;
 const CC = Components.classes;
-const CU = Components.utils;
-const CR = Components.results;
 const Ci = Components.interfaces;
 const Cc = Components.classes;
 const Cu = Components.utils;
-const Cr = Components.results;
 
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/FileUtils.jsm");
@@ -119,17 +114,6 @@ var ABE = {
   }
 };
 
-function xpcom_generateQI(iids) {
-  var checks = [];
-  for each (var iid in iids) {
-    checks.push("CI." + iid.name + ".equals(iid)");
-  }
-  var src = checks.length
-    ? "if (" + checks.join(" || ") + ") return this;\n"
-    : "";
-  return new Function("iid", src + "throw Components.results.NS_ERROR_NO_INTERFACE;");
-}
-
 function xpcom_checkInterfaces(iid,iids,ex) {
   for (var j = iids.length; j-- >0;) {
     if (iid.equals(iids[j])) return true;
@@ -156,20 +140,14 @@ function HTTPSEverywhere() {
   this.INCLUDE=INCLUDE;
   this.ApplicableList = ApplicableList;
   this.browser_initialised = false; // the browser is completely loaded
-  
+
+
   this.prefs = this.get_prefs();
   this.rule_toggle_prefs = this.get_prefs(PREFBRANCH_RULE_TOGGLE);
 
   this.httpNowhereEnabled = this.prefs.getBoolPref("http_nowhere.enabled");
+  this.isMobile = this.doMobileCheck();
 
-  // Disable SSLv3 to prevent POODLE attack.
-  // https://www.imperialviolet.org/2014/10/14/poodle.html
-  var root_prefs = this.get_prefs(PREFBRANCH_NONE);
-  var TLS_MIN = "security.tls.version.min";
-  if (root_prefs.getIntPref(TLS_MIN) < 1) {
-    root_prefs.setIntPref(TLS_MIN, 1);
-  }
-  
   // We need to use observers instead of categories for FF3.0 for these:
   // https://developer.mozilla.org/en/Observer_Notifications
   // https://developer.mozilla.org/en/nsIObserverService.
@@ -179,11 +157,16 @@ function HTTPSEverywhere() {
   this.obsService = CC["@mozilla.org/observer-service;1"]
                     .getService(Components.interfaces.nsIObserverService);
                     
-  if(this.prefs.getBoolPref("globalEnabled")){
+  if (this.prefs.getBoolPref("globalEnabled")) {
     this.obsService.addObserver(this, "profile-before-change", false);
     this.obsService.addObserver(this, "profile-after-change", false);
     this.obsService.addObserver(this, "sessionstore-windows-restored", false);
     this.obsService.addObserver(this, "browser:purge-session-history", false);
+  } else {
+    // Need this to initialize FF for Android UI even when HTTPS-E is off
+    if (this.isMobile) {
+      this.obsService.addObserver(this, "sessionstore-windows-restored", false);
+    }
   }
 
   var pref_service = Components.classes["@mozilla.org/preferences-service;1"]
@@ -286,7 +269,7 @@ HTTPSEverywhere.prototype = {
   getExpando: function(browser, key) {
     let obj = this.expandoMap.get(browser);
     if (!obj) {
-      this.log(NOTE, "No expando for " + browser.currentURI);
+      this.log(NOTE, "No expando for " + browser.currentURI.spec);
       return null;
     }
     return obj[key];
@@ -300,11 +283,11 @@ HTTPSEverywhere.prototype = {
     obj[key] = value;
   },
 
-  // We use onLocationChange to make a fresh list of rulesets that could have
+  // We use resetApplicableList to make a fresh list of rulesets that could have
   // applied to the content in the current page (the "applicable list" is used
   // for the context menu in the UI).  This will be appended to as various
   // content is embedded / requested by JavaScript.
-  onLocationChange: function(browser) {
+  resetApplicableList: function(browser) {
     if (!this.prefs.getBoolPref("globalEnabled")) {
       return;
     }
@@ -325,25 +308,42 @@ HTTPSEverywhere.prototype = {
   // Also note some requests, like Safe Browsing requests, will have no
   // associated tab.
   getBrowserForChannel: function(channel) {
-    let loadContext;
+    let loadContext, topFrameElement, associatedWindow;
+    let spec = channel.URI.spec;
     try {
       loadContext = channel.notificationCallbacks.getInterface(CI.nsILoadContext);
     } catch(e) {
+    }
+
+    if (!loadContext) {
       try {
         loadContext = channel.loadGroup.notificationCallbacks
           .getInterface(CI.nsILoadContext);
       } catch(e) {
-        this.log(NOTE, "no loadGroup notificationCallbacks for "
-                 + channel.URI.spec + ": " + e);
+        // Lots of requests have no notificationCallbacks, mostly background
+        // ones like OCSP checks or smart browsing fetches.
+        this.log(DBUG, "getBrowserForChannel: no loadContext for " + spec);
         return null;
       }
     }
+
+    if (loadContext) {
+      topFrameElement = loadContext.topFrameElement;
+      try {
+        // If loadContext is an nsDocShell, associatedWindow is present.
+        // Otherwise, if it's just a LoadContext, accessing it will throw
+        // NS_ERROR_UNEXPECTED.
+        associatedWindow = loadContext.associatedWindow;
+      } catch (e) {
+      }
+    }
+
     // On e10s (multiprocess, aka electrolysis) Firefox,
     // loadContext.topFrameElement gives us a reference to the XUL <browser>
     // element we need. However, on non-e10s Firefox, topFrameElement is null.
-    if (loadContext && loadContext.topFrameElement) {
-      return loadContext.topFrameElement;
-    } else if (loadContext) {
+    if (topFrameElement) {
+      return topFrameElement;
+    } else if (associatedWindow) {
       // For non-e10s Firefox, get the XUL <browser> element using this rather
       // magical / opaque code cribbed from
       // https://developer.mozilla.org/en-US/Add-ons/Code_snippets/Tabbed_browser#Getting_the_browser_that_fires_the_http-on-modify-request_notification_(example_code_updated_for_loadContext)
@@ -359,19 +359,40 @@ HTTPSEverywhere.prototype = {
         .getInterface(Ci.nsIDOMWindow);
       // this is the gBrowser object of the firefox window this tab is in
       var gBrowser = aDOMWindow.gBrowser;
-      // this is the clickable tab xul element, the one found in the tab strip
-      // of the firefox window, aTab.linkedBrowser is same as browser var above
-      var aTab = gBrowser._getTabForContentWindow(contentWindow.top);
-      // this is the browser within the tab
-      if (aTab) {
-        var browser = aTab.linkedBrowser;
-        return browser;
+      if (gBrowser) {
+        var aTab = gBrowser._getTabForContentWindow(contentWindow.top);
+        // this is the clickable tab xul element, the one found in the tab strip
+        // of the firefox window, aTab.linkedBrowser is same as browser var above
+        // this is the browser within the tab
+        if (aTab) {
+          return aTab.linkedBrowser;
+        } else {
+          this.log(NOTE, "getBrowserForChannel: aTab was null for " + spec);
+          return null;
+        }
+      } else if (aDOMWindow.BrowserApp) {
+        // gBrowser is unavailable in Firefox for Android, and in some desktop
+        // contexts, like the fetches for new tab tiles (which have an
+        // associatedWindow, but no gBrowser)?
+        // If available, try using the BrowserApp API:
+        // https://developer.mozilla.org/en-US/Add-ons/Firefox_for_Android/API/BrowserApp
+        // TODO: We don't get the toolbar icon on android. Probably need to fix
+        // the gBrowser reference in toolbar_button.js.
+        // Also TODO: Where are these log messages going? They don't show up in
+        // remote debug console.
+        var mTab = aDOMWindow.BrowserApp.getTabForWindow(contentWindow.top);
+        if (mTab) {
+          return mTab.browser;
+        } else {
+          this.log(WARN, "getBrowserForChannel: mTab was null for " + spec);
+          return null;
+        }
       } else {
-        this.log(NOTE, "getBrowserForChannel: aTab was null.");
+        this.log(INFO, "getBrowserForChannel: No gBrowser and no BrowserApp for " + spec);
+        return null;
       }
     } else {
-      this.log(NOTE, "getBrowserForChannel: No loadContext for: " +
-        channel.URI.spec);
+      this.log(NOTE, "getBrowserForChannel: No loadContext for " + spec);
       return null;
     }
   },
@@ -534,7 +555,13 @@ HTTPSEverywhere.prototype = {
       }
     } else if (topic == "sessionstore-windows-restored") {
       this.log(DBUG,"Got sessionstore-windows-restored");
-      this.maybeShowObservatoryPopup();
+      if (!this.isMobile) {
+        this.maybeShowObservatoryPopup();
+      } else {
+        this.log(WARN, "Initializing Firefox for Android UI");
+        Cu.import("chrome://https-everywhere/content/code/AndroidUI.jsm");
+        AndroidUI.init();
+      }
       this.browser_initialised = true;
     } else if (topic == "nsPref:changed") {
         // If the user toggles the Mixed Content Blocker settings, reload the rulesets
@@ -714,6 +741,13 @@ HTTPSEverywhere.prototype = {
     return o_branch;
   },
 
+  // Are we on Firefox for Android?
+  doMobileCheck: function() {
+    let appInfo = CC["@mozilla.org/xre/app-info;1"].getService(CI.nsIXULAppInfo);
+    let ANDROID_ID = "{aa3c5121-dab2-40e2-81ca-7ea25febc110}";
+    return (appInfo.ID === ANDROID_ID);
+  },
+
   chrome_opener: function(uri, args) {
     // we don't use window.open, because we need to work around TorButton's 
     // state control
@@ -835,8 +869,15 @@ function https_everywhereLog(level, str) {
     threshold = WARN;
   }
   if (level >= threshold) {
-    dump("HTTPS Everywhere: "+str+"\n");
-    econsole.logStringMessage("HTTPS Everywhere: " +str);
+    var levelName = ["", "VERB", "DBUG", "INFO", "NOTE", "WARN"][level];
+    var prefix = "HTTPS Everywhere " + levelName + ": ";
+    // dump() prints to browser stdout. That's sometimes undesireable,
+    // so only do it when a pref is set (running from test.sh enables
+    // this pref).
+    if (prefs.getBoolPref("log_to_stdout")) {
+      dump(prefix + str + "\n");
+    }
+    econsole.logStringMessage(prefix + str);
   }
 }
 

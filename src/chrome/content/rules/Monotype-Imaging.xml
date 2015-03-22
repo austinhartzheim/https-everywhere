@@ -1,43 +1,36 @@
 <!--
+Disabled by https-everywhere-checker because:
+Fetch error: http://webfonts.fonts.com/ => http://webfonts.fonts.com/: (35, 'Unknown SSL protocol error in connection to www.fonts.com:443 ')
+Fetch error: http://www.webfonts.fonts.com/ => http://www.webfonts.fonts.com/: (35, 'Unknown SSL protocol error in connection to www.fonts.com:443 ')
+Fetch error: http://webfonts.fontslive.com/ => https://webfonts.fontslive.com/: (6, 'Could not resolve host: webfonts.fontslive.com')
 	For rules subject to javascript redirect loops, see Fonts.com-noscript.xml.
 
 
-	CDN buckets:
+	Other Monotype Imaging rulesets:
 
-		- cs26.wac.edgecastcdn.net
-
-			- cdnbadge.fonts.net
-			- cdncms.fonts.net
+		- Fonts.net.xml
+		- Linotype.com.xml
 
 
 	Nonfunctional domains:
 
-		- cdnbadge.fonts.net ¹
 		- (www.)fontslive.com ²
 
-	¹ 404
 	² Reset
 
-
-	Problematic domains:
-
-		- blog.fonts.com ¹
-		- cdncms.fonts.net ²
-
-	¹ Mismatched, CN: *.azurewebsites.net
-	² Works; mismatched, CN: *.fonts.com
 
 
 	Mixed content:
 
-		- css on blog.fonts.com from fast.fonts.net
+		- css on blog.fonts.com from fast.fonts.net ¹
 
 		- Images on www.fonts.com from cdncms.fonts.net *
 
+	¹ Secured by us
 	* Not secured by us <= mismatched
 
 -->
-<ruleset name="Monotype Imaging (partial)">
+<ruleset name="Monotype Imaging (partial)" default_off='failed ruleset test'>
 
 	<target host="ascenderfonts.com" />
 	<target host="www.ascenderfonts.com" />

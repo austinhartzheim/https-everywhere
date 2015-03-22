@@ -1,8 +1,32 @@
+5.0development.3                            (2015-03-10)
+  * Added automated ruleset testing.
+  * Disabled many rules that failed ruleset tests.
+  * Fix cookie securing so it works for wildcard cookies
+    even when a wildcard target host is not present.
+  * User rule creation in Chromium is only offered on HTTPS.
+  * Enabling and disabling user rules on Chromium works.
+  * Candidate for 5.0 series stable release.
+
+5.0development.2                            (2014-12-22)
+  * Merged mobile support from 4.0 branch.
+  * New translations imported:
+    Catalan, Chinese (Taiwan), Croatian (Croatia),
+    Estonian, Faroese, French (Canada), Khmer, Malay (Malaysia),
+    Portuguese (Brazil), Romanian, Serbian, Sinhala (Sri Lanka),
+    Slovak (Slovakia), Slovenian (Slovenia), Thai, Ukrainian
+  * Various ruleset fixes.
+  * Candidate for a 5.0 series stable release.
+
 5.0development.1                            (2014-11-25)
   * Support for multi-process Firefox (aka electrolysis or e10s).
   * Merge latest rulesets.
 
-4.0.2		(2014-10-15)
+Firefox 4.0.3 / Chrome-2015.01.22 (2015-01-22)
+  * Ruleset updates.
+  * Update SSL Observatory code to match Firefox API changes in hashing.
+  * Bring code in line with guidelines for addons.mozilla.org.
+
+4.0.2		  (2014-10-15)
   * Disable SSL 3 to Prevent POODLE attack:
     https://github.com/EFForg/https-everywhere/pull/674
   * NEW: HTTP Nowhere mode. Block all plaintext http
@@ -16,7 +40,6 @@
   Institute of GB, Wall Street Journal
 
 4.0.1										(2014-09-11)
-
   * Significant new coverage: Reddit, Quora
   * Fixes include:
     Frontier Networks, Hotmail / Live, Microsoft, Mozilla, Ohio State, Rackspace, SJ.se, Timbo.se
